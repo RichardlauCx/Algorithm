@@ -24,11 +24,11 @@ def func_sort_2(tuples):
 
 
 def minority_sort_1(n):
-    function_name = "\tdef func_sort_" + str(n) + "(self)" + ":"
+    function_name = "\tdef func_sort_" + str(n) + "(self, _tuples)" + ":"
     function_initialization = "\tn = self.n\n" + "\t\ttuples = self.tuples"
-    function_body_1 = "\ttuples[: n-1] = self.func_sort_" + str(n - 1) + "(self.tuples[: n-1])"
-    function_body_2 = "\ttuples[n-1:] = self.func_sort_" + str(n - 1) + "(self.tuples[n-1:])"
-    function_body_3 = "\ttuples[: n-1] = self.func_sort_" + str(n - 1) + "(self.tuples[: n-1])"
+    function_body_1 = "\ttuples[: n - 1] = self.func_sort_" + str(n - 1) + "(_tuples[: n - 1])"
+    function_body_2 = "\ttuples[n - 1:] = self.func_sort_" + str(n - 1) + "(_tuples[n - 1:])"
+    function_body_3 = "\ttuples[: n - 1] = self.func_sort_" + str(n - 1) + "(_tuples[: n - 1])"
 
     function_return = "\treturn tuples"
 
@@ -76,7 +76,7 @@ def how_many():
                      + "\t\tself.n = n\n" \
                      + "\t\tself.tuples = tuples\n\n"
 
-        func_sort_two = "\tdef func_sort_2(self):\n" \
+        func_sort_two = "\tdef func_sort_2(self, _tuples):\n" \
                         + "\t\tx = self.tuples[0]\n" \
                         + "\t\ty = self.tuples[1]\n" \
                         + "\t\tif x > y:\n" \
@@ -92,16 +92,16 @@ def how_many():
         for num in range(3, n+1):
             minority_sort_1(num)
 
-        instantiation_object = "\tn = 0\n" + "\ttuple_s = tuple()\n" \
-                               + "\topt = Sort_Minority(n, tuple_s)\n"
-        func_start = "if __name__ == '__main__':\n" + instantiation_object + "\topt.func_sort_" + str(n) + "()\n"
+        instantiation_object = "\tnumber = 0\n" + "\ttuple_s = tuple()\n" \
+                               + "\topt = Sort_Minority(number, tuple_s)\n"
+        func_start = "if __name__ == '__main__':\n" + instantiation_object + "\topt.func_sort_" + str(n) + "(tuple_s)\n"
         with open("sort_minority.py", "a") as f:
             f.write(func_start)
 
 
 if __name__ == '__main__':
     how_many()
-
+    # TODO 尝试把数据通过写入一个文件再输出到另外的一个文件来实现
 
 
 
