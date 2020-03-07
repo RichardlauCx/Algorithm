@@ -24,22 +24,22 @@ def func_sort_2(tuples):
 
 
 def minority_sort_1(n):
-    function_name = "def func_sort_" + str(n) + "(n, tuples)" + ":"
-    # function_initialization = "tuples = tuple(tuple_s)"
-    function_body_1 = "tuples[: n-1] = func_sort_" + str(n - 1) + "(tuples[: n-1])"
-    function_body_2 = "tuples[n-1:] = func_sort_" + str(n - 1) + "(tuples[n-1:])"
-    function_body_3 = "tuples[: n-1] = func_sort_" + str(n - 1) + "(tuples[: n-1])"
+    function_name = "\tdef func_sort_" + str(n) + "(self)" + ":"
+    function_initialization = "\tn = self.n\n" + "\t\ttuples = self.tuples"
+    function_body_1 = "\ttuples[: n-1] = self.func_sort_" + str(n - 1) + "(self.tuples[: n-1])"
+    function_body_2 = "\ttuples[n-1:] = self.func_sort_" + str(n - 1) + "(self.tuples[n-1:])"
+    function_body_3 = "\ttuples[: n-1] = self.func_sort_" + str(n - 1) + "(self.tuples[: n-1])"
 
-    function_return = "return tuples"
+    function_return = "\treturn tuples"
 
     with open("sort_minority.py", "a") as f:
         # Notice: 此自动生成方法需要建立在前一个方法（n-1）存在的基础上才能实现
         f.write(function_name + "\n")
-        # f.write("\t" + function_initialization + "\n")
+        f.write("\t" + function_initialization + "\n")
         f.write("\t" + function_body_1 + "\n")
         f.write("\t" + function_body_2 + "\n")
         f.write("\t" + function_body_3 + "\n")
-        f.write("\n\t" + function_return + "\n"*3)
+        f.write("\n\t" + function_return + "\n"*2)
 
 
 def how_many():
@@ -71,19 +71,19 @@ def how_many():
         func_sort_2(tuple_s)
 
     else:
-        func_class = "class sort_minority:\n" \
+        func_class = "class Sort_Minority:\n" \
                      + "\tdef __init__(self, n, tuples):\n" \
                      + "\t\tself.n = n\n" \
-                     + "\t\tself.tuples = tuples\n\n\n"
+                     + "\t\tself.tuples = tuples\n\n"
 
-        func_sort_two = "def func_sort_2(tuples):\n" \
-                        + "\tx = tuples[0]\n" \
-                        + "\ty = tuples[1]\n" \
-                        + "\tif x > y:\n" \
-                        + "\t\ttemp = x\n" \
-                        + "\t\tx = y\n" \
-                        + "\t\ty = temp\n" \
-                        + "\treturn x, y" + "\n"*3
+        func_sort_two = "\tdef func_sort_2(self):\n" \
+                        + "\t\tx = self.tuples[0]\n" \
+                        + "\t\ty = self.tuples[1]\n" \
+                        + "\t\tif x > y:\n" \
+                        + "\t\t\ttemp = x\n" \
+                        + "\t\t\tx = y\n" \
+                        + "\t\t\ty = temp\n" \
+                        + "\t\treturn x, y" + "\n"*2
 
         with open("sort_minority.py", "a") as f:
             f.write(func_class)
@@ -92,7 +92,9 @@ def how_many():
         for num in range(3, n+1):
             minority_sort_1(num)
 
-        func_start = "if __name__ == '__main__':\n" + "\tfunc_sort_" + str(n) + "(n, tu)\n"
+        instantiation_object = "\tn = 0\n" + "\ttuple_s = tuple()\n" \
+                               + "\topt = Sort_Minority(n, tuple_s)\n"
+        func_start = "if __name__ == '__main__':\n" + instantiation_object + "\topt.func_sort_" + str(n) + "()\n"
         with open("sort_minority.py", "a") as f:
             f.write(func_start)
 
